@@ -20,6 +20,6 @@ def test_transform_data():
 
     p.fit(features_transform, targets)
     targets_hat = p.predict(features_transform)
-
+    print("here is thge asdfasdfasdfa", targets == targets_hat)
     #your perceptron should fit this dataset perfectly after transforming the data
     assert np.allclose(targets, targets_hat)

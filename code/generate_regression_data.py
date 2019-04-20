@@ -40,4 +40,8 @@ def generate_regression_data(degree, N, amount_of_noise=1.0):
             responds to x as a polynomial of degree. 
 
     """
-    raise NotImplementedError()
+    x = np.random.uniform(-1,1,size = N)
+    r = np.random.uniform(-10,10,size = 2)
+    y = r[0] * (x**degree)
+    y += np.random.normal(loc = 0.0, scale = np.std(y) * amount_of_noise, size = y.shape)
+    return x,y

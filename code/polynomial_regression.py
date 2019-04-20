@@ -52,7 +52,8 @@ class PolynomialRegression():
             degree (int): Degree of polynomial used to fit the data.
         """
         self.degree = degree
-        raise NotImplementedError()
+        self.weights = None
+        
     
     def fit(self, features, targets):
         """
@@ -68,7 +69,11 @@ class PolynomialRegression():
         Returns:
             None (saves model and training data internally)
         """
-        raise NotImplementedError()
+
+        new_features = np.asarray([[feature**degree for degree in range(self.degree + 1)] for feature in features])
+        interior = new_features.transpose() @ new_features
+        self.weights = (np.linalg.inv(interior) @ new_features.transpose()) @ targets
+        
 
     def predict(self, features):
         """
@@ -80,7 +85,12 @@ class PolynomialRegression():
         Returns:
             predictions (np.ndarray): Output of saved model on features.
         """
-        raise NotImplementedError()
+        polynomial = np.poly1d(self.weights[::-1])
+        predictions = []
+        for feature in features:
+            predictions.append(polynomial(feature))
+        return np.asarray(predictions)
+        
 
     def visualize(self, features, targets):
         """

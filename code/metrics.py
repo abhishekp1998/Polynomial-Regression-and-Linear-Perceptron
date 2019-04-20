@@ -12,4 +12,10 @@ def mean_squared_error(estimates, targets):
 
     https://en.wikipedia.org/wiki/Mean_squared_error
     """
-    raise NotImplementedError()
+    n = len(estimates) 
+    s = 0 
+    for i in range(len(estimates)):
+        s += (estimates[i] - targets[i])**2
+    s = s/n
+    return s 
+
